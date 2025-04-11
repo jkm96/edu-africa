@@ -6,17 +6,21 @@ use App\Http\Requests\Institution\InstitutionQueryRequest;
 use App\Http\Resources\InstitutionResource;
 use App\Models\Institution;
 use App\Utils\Helpers\ResponseHelpers;
+use App\Utils\Traits\RecordFilterTrait;
 use Exception;
 
 class InstitutionService implements InstitutionServiceInterface
 {
+    use RecordFilterTrait;
     public function index(InstitutionQueryRequest $queryRequest)
     {
         try {
             $query = Institution::orderBy('created_at', 'desc');
 
-            $pageSize = $queryParams['page_size'] ?? 10;
-            $currentPage = $queryParams['page_number'] ?? 1;
+            $this->applyInstitutionFilters($query, $queryRequest);
+
+            $pageSize = $queryRequest['page_size'] ?? 10;
+            $currentPage = $queryRequest['page_number'] ?? 1;
             $institutions = $query->paginate($pageSize, ['*'], 'page', $currentPage);
 
             return ResponseHelpers::ConvertToPagedJsonResponseWrapper(

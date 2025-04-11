@@ -41,4 +41,13 @@ class BaseQueryRequest extends FormRequest
             'search_term' => 'nullable',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'page_size.min' => 'The page size must be a positive number greater than zero.',
+            'page_number.min' => 'The page number must be a positive number greater than zero.',
+        ];
+    }
+
 }

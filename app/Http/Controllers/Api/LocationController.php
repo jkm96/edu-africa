@@ -3,34 +3,35 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Institution\InstitutionQueryRequest;
-use App\Http\Resources\InstitutionResource;
-use App\Models\Institution;
-use App\Services\Institution\InstitutionServiceInterface;
+use App\Http\Requests\Location\CreateLocationRequest;
+use App\Services\Location\LocationServiceInterface;
 use Illuminate\Http\Request;
 
 /**
- * @group Institutions
+ * @group Locations
  *
- * APIs for managing institutions
+ * APIs for managing locations
  */
-class InstitutionController extends Controller
+class LocationController extends Controller
 {
-    public function __construct(
-        protected InstitutionServiceInterface $institutionService
-    ) {}
-
-    public function index(InstitutionQueryRequest $queryRequest)
+    public function __construct(protected LocationServiceInterface $locationService)
     {
-        return $this->institutionService->index($queryRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateLocationRequest $request)
     {
-        //
+        return $this->locationService->store($request);
     }
 
     /**

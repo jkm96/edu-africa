@@ -22,7 +22,7 @@ class InstitutionQueryRequest extends BaseQueryRequest
      */
     public function rules(): array
     {
-        return [
+        return $this->commonRules() + [
             'country_id' => ['nullable', 'integer', 'exists:locations,id'],
             'type' => ['nullable', 'string'],
         ];
