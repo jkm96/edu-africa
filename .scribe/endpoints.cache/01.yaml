@@ -27,16 +27,37 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      order_by:
+        name: order_by
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      search_term:
+        name: search_term
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      order_by: architecto
     fileParameters: []
     responses:
       -
         status: 200
-        content: ''
+        content: '{"data":[{"id":1,"country":"Kenya","region":"Nairobi","city":"Nairobi","postal_code":"00100","latitude":"-90.0000000","longitude":"-180.0000000","timezone":"Africa\/Nairobi","created_at":"2025-04-11T07:52:22.000000Z","updated_at":"2025-04-11T07:52:22.000000Z"}],"status_code":200,"message":"Locations retrieved successfully","succeeded":true}'
         headers:
-          content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
+          content-type: application/json
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -178,14 +199,14 @@ endpoints:
         name: id
         description: 'The ID of the location.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -231,14 +252,14 @@ endpoints:
         name: id
         description: 'The ID of the location.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -274,14 +295,14 @@ endpoints:
         name: id
         description: 'The ID of the location.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

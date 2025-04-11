@@ -7,6 +7,7 @@ use App\Utils\Enums\InstitutionType;
 use App\Utils\Enums\OwnershipType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Institution extends Model
 {
@@ -26,6 +27,21 @@ class Institution extends Model
         'latitude',
         'longitude',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($institution) {
+            if (empty($institution->slug)) {
+                $institution->slug = Str::slug($institution->name . '-' . uniqid());
+            }
+        });
+
+        static::updating(function ($institution) {
+            if ($institution->isDirty('name')) {
+                $institution->slug = Str::slug($institution->name . '-' . uniqid());
+            }
+        });
+    }
 
     protected $casts = [
         'type' => InstitutionType::class,

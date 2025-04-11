@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Location\CreateLocationRequest;
+use App\Http\Requests\Location\LocationQueryRequest;
 use App\Services\Location\LocationServiceInterface;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,9 @@ class LocationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(LocationQueryRequest $queryRequest)
     {
-        //
+        return $this->locationService->retrieveLocations($queryRequest);
     }
 
     /**

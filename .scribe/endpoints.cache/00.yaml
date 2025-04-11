@@ -16,7 +16,7 @@ endpoints:
         APIs for managing institutions
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Display a listing of the resource.'
       description: ''
       authenticated: false
       custom: []
@@ -98,7 +98,7 @@ endpoints:
     responses:
       -
         status: 422
-        content: '{"data":{"errors":{"country_id":["The selected country id is invalid."]}},"statusCode":422,"message":"Validation failed","succeeded":false}'
+        content: '{"data":{"errors":{"country_id":["The selected country id is invalid."]}},"status_code":422,"message":"Validation failed","succeeded":false}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -133,8 +133,151 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      slug:
+        name: slug
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      type:
+        name: type
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      accreditation_status:
+        name: accreditation_status
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      ownership_type:
+        name: ownership_type
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: m
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      founded_year:
+        name: founded_year
+        description: 'Must be at least 1000. Must not be greater than 2025.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      website_url:
+        name: website_url
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: false
+        example: breitenberg.gilbert@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      phone:
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: uwpwlvqwrsitcpsc
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      logo_url:
+        name: logo_url
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location_id:
+        name: location_id
+        description: 'The <code>id</code> of an existing record in the locations table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude:
+        name: latitude
+        description: 'Must be between -90 and 90.'
+        required: false
+        example: -89
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      longitude:
+        name: longitude
+        description: 'Must be between -180 and 180.'
+        required: false
+        example: -180
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: b
+      slug: 'n'
+      type: g
+      accreditation_status: z
+      ownership_type: m
+      founded_year: 15
+      website_url: 'http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab'
+      email: breitenberg.gilbert@example.com
+      phone: uwpwlvqwrsitcpsc
+      logo_url: 'http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium'
+      location_id: architecto
+      latitude: -89
+      longitude: -180
     fileParameters: []
     responses: []
     responseFields: []

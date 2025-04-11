@@ -19,7 +19,7 @@ class ResponseHelpers
 
         $response = [
             "data" => $data,
-            "statusCode" => $statusCode,
+            "status_code" => $statusCode,
             "message" => $message,
             "succeeded" => $succeeded,
         ];
@@ -47,10 +47,10 @@ class ResponseHelpers
 
         $response = [
             "data" => [
-                'paging_metaData' => $paginationData,
+                'paging_meta_data' => $paginationData,
                 'data' => $data
             ],
-            "statusCode" => $statusCode,
+            "status_code" => $statusCode,
             "message" => $message,
             "succeeded" => $succeeded,
         ];

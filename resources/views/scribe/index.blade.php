@@ -72,7 +72,7 @@
                 </li>
                                     <ul id="tocify-subheader-institutions" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="institutions-GETapi-institutions">
-                                <a href="#institutions-GETapi-institutions">GET api/institutions</a>
+                                <a href="#institutions-GETapi-institutions">Display a listing of the resource.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="institutions-POSTapi-institutions">
                                 <a href="#institutions-POSTapi-institutions">Store a newly created resource in storage.</a>
@@ -142,7 +142,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     <p>APIs for managing institutions</p>
 
-                                <h2 id="institutions-GETapi-institutions">GET api/institutions</h2>
+                                <h2 id="institutions-GETapi-institutions">Display a listing of the resource.</h2>
 
 <p>
 </p>
@@ -215,7 +215,7 @@ access-control-allow-origin: *
             ]
         }
     },
-    &quot;statusCode&quot;: 422,
+    &quot;status_code&quot;: 422,
     &quot;message&quot;: &quot;Validation failed&quot;,
     &quot;succeeded&quot;: false
 }</code>
@@ -374,7 +374,23 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-bash">curl --request POST \
     "http://localhost/api/institutions" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"b\",
+    \"slug\": \"n\",
+    \"type\": \"g\",
+    \"accreditation_status\": \"z\",
+    \"ownership_type\": \"m\",
+    \"founded_year\": 15,
+    \"website_url\": \"http:\\/\\/www.okon.com\\/accusantium-harum-mollitia-modi-deserunt-aut-ab\",
+    \"email\": \"breitenberg.gilbert@example.com\",
+    \"phone\": \"uwpwlvqwrsitcpsc\",
+    \"logo_url\": \"http:\\/\\/smitham.com\\/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium\",
+    \"location_id\": \"architecto\",
+    \"latitude\": -89,
+    \"longitude\": -180
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -387,9 +403,26 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "b",
+    "slug": "n",
+    "type": "g",
+    "accreditation_status": "z",
+    "ownership_type": "m",
+    "founded_year": 15,
+    "website_url": "http:\/\/www.okon.com\/accusantium-harum-mollitia-modi-deserunt-aut-ab",
+    "email": "breitenberg.gilbert@example.com",
+    "phone": "uwpwlvqwrsitcpsc",
+    "logo_url": "http:\/\/smitham.com\/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium",
+    "location_id": "architecto",
+    "latitude": -89,
+    "longitude": -180
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -465,7 +498,151 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-institutions"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="POSTapi-institutions"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-institutions"
+               value="g"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>g</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>accreditation_status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="accreditation_status"                data-endpoint="POSTapi-institutions"
+               value="z"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>z</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>ownership_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="ownership_type"                data-endpoint="POSTapi-institutions"
+               value="m"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>m</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>founded_year</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="founded_year"                data-endpoint="POSTapi-institutions"
+               value="15"
+               data-component="body">
+    <br>
+<p>Must be at least 1000. Must not be greater than 2025. Example: <code>15</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>website_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="website_url"                data-endpoint="POSTapi-institutions"
+               value="http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Example: <code>http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-institutions"
+               value="breitenberg.gilbert@example.com"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>breitenberg.gilbert@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-institutions"
+               value="uwpwlvqwrsitcpsc"
+               data-component="body">
+    <br>
+<p>Must not be greater than 20 characters. Example: <code>uwpwlvqwrsitcpsc</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>logo_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="logo_url"                data-endpoint="POSTapi-institutions"
+               value="http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Example: <code>http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>location_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="location_id"                data-endpoint="POSTapi-institutions"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the locations table. Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="latitude"                data-endpoint="POSTapi-institutions"
+               value="-89"
+               data-component="body">
+    <br>
+<p>Must be between -90 and 90. Example: <code>-89</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="longitude"                data-endpoint="POSTapi-institutions"
+               value="-180"
+               data-component="body">
+    <br>
+<p>Must be between -180 and 180. Example: <code>-180</code></p>
+        </div>
+        </form>
 
                     <h2 id="institutions-GETapi-institutions--id-">Display the specified resource.</h2>
 
@@ -864,7 +1041,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost/api/locations" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"order_by\": \"architecto\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -877,9 +1058,14 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "order_by": "architecto"
+};
+
 fetch(url, {
     method: "GET",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -892,12 +1078,30 @@ fetch(url, {
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">content-type: text/html; charset=UTF-8
-cache-control: no-cache, private
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;"></code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;country&quot;: &quot;Kenya&quot;,
+            &quot;region&quot;: &quot;Nairobi&quot;,
+            &quot;city&quot;: &quot;Nairobi&quot;,
+            &quot;postal_code&quot;: &quot;00100&quot;,
+            &quot;latitude&quot;: &quot;-90.0000000&quot;,
+            &quot;longitude&quot;: &quot;-180.0000000&quot;,
+            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;,
+            &quot;created_at&quot;: &quot;2025-04-11T07:52:22.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-04-11T07:52:22.000000Z&quot;
+        }
+    ],
+    &quot;status_code&quot;: 200,
+    &quot;message&quot;: &quot;Locations retrieved successfully&quot;,
+    &quot;succeeded&quot;: true
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-locations" hidden>
@@ -969,7 +1173,30 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>order_by</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="order_by"                data-endpoint="GETapi-locations"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>search_term</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="search_term"                data-endpoint="GETapi-locations"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+        </form>
 
                     <h2 id="locations-POSTapi-locations">Store a newly created resource in storage.</h2>
 
@@ -1191,14 +1418,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/locations/architecto" \
+    --get "http://localhost/api/locations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/locations/architecto"
+    "http://localhost/api/locations/1"
 );
 
 const headers = {
@@ -1301,14 +1528,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-locations--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-locations--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the location. Example: <code>architecto</code></p>
+<p>The ID of the location. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1325,14 +1552,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/locations/architecto" \
+    "http://localhost/api/locations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/locations/architecto"
+    "http://localhost/api/locations/1"
 );
 
 const headers = {
@@ -1425,14 +1652,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-locations--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-locations--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the location. Example: <code>architecto</code></p>
+<p>The ID of the location. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1449,14 +1676,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/locations/architecto" \
+    "http://localhost/api/locations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/locations/architecto"
+    "http://localhost/api/locations/1"
 );
 
 const headers = {
@@ -1545,14 +1772,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-locations--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-locations--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the location. Example: <code>architecto</code></p>
+<p>The ID of the location. Example: <code>1</code></p>
             </div>
                     </form>
 

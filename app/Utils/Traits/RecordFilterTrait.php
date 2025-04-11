@@ -35,4 +35,20 @@ trait RecordFilterTrait
             });
         }
     }
+
+    /**
+     * @param $query
+     * @param $searchTerm
+     * @return void
+     */
+    private function applyLocationSearchTermFilter($query, $searchTerm)
+    {
+        if ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('country', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('region', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('city', 'like', '%' . $searchTerm . '%');
+            });
+        }
+    }
 }
