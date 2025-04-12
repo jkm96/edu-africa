@@ -49,5 +49,4 @@ class BaseQueryRequest extends FormRequest
             'page_number.min' => 'The page number must be a positive number greater than zero.',
         ];
     }
-
 }
