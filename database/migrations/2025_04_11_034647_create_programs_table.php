@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('institution_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->enum('level', ProgramLevel::values());
-            $table->enum('mode', ProgramMode::values());
+            $table->enum('mode', ProgramMode::values())->nullable();
             $table->string('duration')->nullable();
             $table->string('faculty_or_school')->nullable();
             $table->text('entry_requirements')->nullable();

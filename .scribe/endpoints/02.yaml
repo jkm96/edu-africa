@@ -25,13 +25,89 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      page_size:
+        name: page_size
+        description: 'Must be at least 1.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      page_number:
+        name: page_number
+        description: 'Must be at least 1.'
+        required: false
+        example: 22
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      order_by:
+        name: order_by
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      search_term:
+        name: search_term
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      institution:
+        name: institution
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      level:
+        name: level
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      mode:
+        name: mode
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      page_size: 16
+      page_number: 22
+      order_by: architecto
+      institution: architecto
+      level: architecto
+      mode: architecto
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":[],"status_code":200,"message":"Programs retrieved successfully","succeeded":true}'
+        content: '{"data":{"paging_meta_data":{"current_page":22,"total_pages":1,"page_size":16,"total_count":0,"last_page":1,"from":null,"to":null},"data":[]},"status_code":200,"message":"Programs retrieved successfully","succeeded":true}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -209,14 +285,14 @@ endpoints:
         name: id
         description: 'The ID of the program.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -224,8 +300,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 404
-        content: '{"data":{"errors":"No query results for model [App\\Models\\Program] 16"},"status_code":404,"message":"Page Not Found.","succeeded":false}'
+        status: 200
+        content: '{"data":{"id":1,"name":"Mathematics and Computer Science","slug":"mathematics-and-computer-science-67fbc01691466","level":"degree","mode":"full_time","duration":"4years","faculty_or_school":"School of Mathematical Sciences","entry_requirements":"4.5 GPA","tuition_fee":"4326.42","currency":"KES","language_of_instruction":"English,Swahili","institution":{"id":1,"name":"Jomo Kenyatta University of Agriculture and Technology","slug":"jomo-kenyatta-university-of-agriculture-and-technology-67fbc01189379","type":"university","accreditation_status":"accredited","ownership_type":"public","founded_year":"1975","website_url":"http:\/\/www.okon.com\/accusantium-harum-mollitia-modi-deserunt-aut-ab","email":"breitenberg.gilbert@example.com","phone":null,"logo_url":"http:\/\/smitham.com\/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium","location_id":1,"latitude":"-50.0000000","longitude":"-160.0000000"}},"status_code":200,"message":"Program retrieved successfully","succeeded":true}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -262,18 +338,128 @@ endpoints:
         name: id
         description: 'The ID of the program.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      institution_id:
+        name: institution_id
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      level:
+        name: level
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      mode:
+        name: mode
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      duration:
+        name: duration
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: m
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      faculty_or_school:
+        name: faculty_or_school
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: i
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      entry_requirements:
+        name: entry_requirements
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      tuition_fee:
+        name: tuition_fee
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      currency:
+        name: currency
+        description: 'Must not be greater than 10 characters.'
+        required: false
+        example: miyvdl
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      language_of_instruction:
+        name: language_of_instruction
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: j
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      institution_id: architecto
+      name: 'n'
+      level: g
+      mode: z
+      duration: m
+      faculty_or_school: i
+      entry_requirements: architecto
+      tuition_fee: 4326.41688
+      currency: miyvdl
+      language_of_instruction: j
     fileParameters: []
     responses: []
     responseFields: []
@@ -305,14 +491,14 @@ endpoints:
         name: id
         description: 'The ID of the program.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

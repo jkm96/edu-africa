@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Program\UpsertProgramRequest;
 use App\Http\Requests\Program\ProgramQueryRequest;
-use App\Http\Requests\Program\UpdateProgramRequest;
 use App\Services\Program\ProgramServiceInterface;
 use Illuminate\Http\Request;
 

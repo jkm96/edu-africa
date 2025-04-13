@@ -1,10 +1,10 @@
-# 🎓 EduAfrica API
+# 🎓 EduAfrika API
 
-EduAfrica API is a public, open-source API that provides structured access to data on educational institutions across Africa — from universities and colleges to high schools and vocational training centers.
+EduAfrika API is a public, open-source API that provides structured access to data on educational institutions across Africa — from universities and colleges to high schools and vocational training centers.
 
 ## 🌍 Project Purpose
 
-Africa has a vast and diverse educational landscape, but reliable, standardized data is often scattered or unavailable. **EduAfrica API** addresses this by offering a centralized, developer-friendly platform for discovering and analyzing schools across the continent.
+Africa has a vast and diverse educational landscape, but reliable, standardized data is often scattered or unavailable. **EduAfrika API** addresses this by offering a centralized, developer-friendly platform for discovering and analyzing schools across the continent.
 
 ## 🧱 Core Features
 
@@ -25,7 +25,7 @@ Africa has a vast and diverse educational landscape, but reliable, standardized 
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Laravel (API only)
+- **Framework**: Laravel
 - **Database**: MySQL or PostgreSQL
 - **Authentication**: Public (JWT or token planned)
 - **Documentation**: OpenAPI/Swagger (in progress)

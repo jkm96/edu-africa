@@ -52,7 +52,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":2,"country":"Kenya","region":"Kiambu","city":"Juja","postal_code":"20100","latitude":"-50.0000000","longitude":"-160.0000000","timezone":"Africa\/Nairobi","created_at":"2025-04-11T11:31:42.000000Z","updated_at":"2025-04-11T11:31:42.000000Z"},{"id":1,"country":"Kenya","region":"Nairobi","city":"Nairobi","postal_code":"00100","latitude":"-90.0000000","longitude":"-180.0000000","timezone":"Africa\/Nairobi","created_at":"2025-04-11T07:52:22.000000Z","updated_at":"2025-04-11T07:52:22.000000Z"}],"status_code":200,"message":"Locations retrieved successfully","succeeded":true}'
+        content: '{"data":[{"id":3,"country":"Kenya","region":"Nairobi County","city":"Nairobi","postal_code":"00100","latitude":"-1.2921000","longitude":"36.8219000","timezone":"Africa\/Nairobi"},{"id":1,"country":"Kenya","region":"Kiambu","city":"Juja","postal_code":"20100","latitude":"-50.0000000","longitude":"-160.0000000","timezone":"Africa\/Nairobi"}],"status_code":200,"message":"Locations retrieved successfully","succeeded":true}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

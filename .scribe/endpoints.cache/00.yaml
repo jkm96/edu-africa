@@ -68,12 +68,12 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         custom: []
-      country_id:
-        name: country_id
-        description: 'The <code>id</code> of an existing record in the locations table.'
+      location:
+        name: location
+        description: ''
         required: false
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
@@ -92,13 +92,13 @@ endpoints:
       page_size: 16
       page_number: 22
       order_by: architecto
-      country_id: 16
+      location: architecto
       type: architecto
     fileParameters: []
     responses:
       -
-        status: 422
-        content: '{"data":{"errors":{"country_id":["The selected country id is invalid."]}},"status_code":422,"message":"Validation failed","succeeded":false}'
+        status: 200
+        content: '{"data":{"paging_meta_data":{"current_page":22,"total_pages":1,"page_size":16,"total_count":2,"last_page":1,"from":null,"to":null},"data":[]},"status_code":200,"message":"Institutions retrieved successfully","succeeded":true}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -276,14 +276,14 @@ endpoints:
         name: id
         description: 'The ID of the institution.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -291,8 +291,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 500
-        content: '{"data":{"error":"Institution not found"},"status_code":500,"message":"Error retrieving institution","succeeded":false}'
+        status: 201
+        content: '{"data":{"id":1,"name":"Jomo Kenyatta University of Agriculture and Technology","slug":"jomo-kenyatta-university-of-agriculture-and-technology-67fbc01189379","type":"university","accreditation_status":"accredited","ownership_type":"public","founded_year":"1975","website_url":"http:\/\/www.okon.com\/accusantium-harum-mollitia-modi-deserunt-aut-ab","email":"breitenberg.gilbert@example.com","phone":null,"logo_url":"http:\/\/smitham.com\/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium","location_id":1,"latitude":"-50.0000000","longitude":"-160.0000000","location":{"id":1,"country":"Kenya","region":"Kiambu","city":"Juja","postal_code":"20100","latitude":"-50.0000000","longitude":"-160.0000000","timezone":"Africa\/Nairobi"}},"status_code":201,"message":"Institution retrieved successfully","succeeded":false}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -329,14 +329,14 @@ endpoints:
         name: id
         description: 'The ID of the institution.'
         required: true
-        example: 2
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 2
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -481,20 +481,404 @@ endpoints:
         name: id
         description: 'The ID of the institution.'
         required: true
-        example: 2
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 2
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/institutions/submit
+    metadata:
+      groupName: Institutions
+      groupDescription: |-
+
+        APIs for managing institutions
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Allows one to submit institution creation request alongside
+        location and a list of programs
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      type:
+        name: type
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      accreditation_status:
+        name: accreditation_status
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      ownership_type:
+        name: ownership_type
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      founded_year:
+        name: founded_year
+        description: 'Must be at least 1000. Must not be greater than 2025.'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      website_url:
+        name: website_url
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'https://www.gulgowski.com/nihil-accusantium-harum-mollitia-modi-deserunt'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: false
+        example: lexus42@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      phone:
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: myuwpwlvqwrsitcp
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      logo_url:
+        name: logo_url
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'http://koch.biz/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location:
+        name: location
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      location.country:
+        name: location.country
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      location.region:
+        name: location.region
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location.city:
+        name: location.city
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location.postal_code:
+        name: location.postal_code
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location.latitude:
+        name: location.latitude
+        description: 'Must be between -90 and 90.'
+        required: false
+        example: -90
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location.longitude:
+        name: location.longitude
+        description: 'Must be between -180 and 180.'
+        required: false
+        example: -180
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      location.timezone:
+        name: location.timezone
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: Europe/Dublin
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      programs:
+        name: programs
+        description: ''
+        required: false
+        example: null
+        type: 'object[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].name':
+        name: 'programs[].name'
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: v
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'programs[].level':
+        name: 'programs[].level'
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'programs[].mode':
+        name: 'programs[].mode'
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: l
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].duration':
+        name: 'programs[].duration'
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: j
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].faculty_or_school':
+        name: 'programs[].faculty_or_school'
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].entry_requirements':
+        name: 'programs[].entry_requirements'
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].tuition_fee':
+        name: 'programs[].tuition_fee'
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].currency':
+        name: 'programs[].currency'
+        description: 'Must not be greater than 10 characters.'
+        required: false
+        example: miyvdl
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      'programs[].language_of_instruction':
+        name: 'programs[].language_of_instruction'
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: j
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: b
+      type: 'n'
+      accreditation_status: g
+      ownership_type: z
+      founded_year: 17
+      website_url: 'https://www.gulgowski.com/nihil-accusantium-harum-mollitia-modi-deserunt'
+      email: lexus42@example.com
+      phone: myuwpwlvqwrsitcp
+      logo_url: 'http://koch.biz/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html'
+      location:
+        country: b
+        region: 'n'
+        city: g
+        postal_code: z
+        latitude: -90
+        longitude: -180
+        timezone: Europe/Dublin
+      programs:
+        -
+          name: v
+          level: d
+          mode: l
+          duration: j
+          faculty_or_school: 'n'
+          entry_requirements: architecto
+          tuition_fee: 4326.41688
+          currency: miyvdl
+          language_of_instruction: j
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/institutions/{institution}/programs'
+    metadata:
+      groupName: Institutions
+      groupDescription: |-
+
+        APIs for managing institutions
+      subgroup: ''
+      subgroupDescription: ''
+      title: "List an institution's programs."
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      institution:
+        name: institution
+        description: 'The institution.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      institution: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":1,"name":"Mathematics and Computer Science","slug":"mathematics-and-computer-science-67fbc01691466","level":"degree","mode":"full_time","duration":"4years","faculty_or_school":"School of Mathematical Sciences","entry_requirements":"4.5 GPA","tuition_fee":"4326.42","currency":"KES","language_of_instruction":"English,Swahili"}],"status_code":200,"message":"Programs retrieved successfully","succeeded":true}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
     responseFields: []
     auth: []
     controller: null

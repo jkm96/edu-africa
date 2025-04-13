@@ -86,6 +86,13 @@
                                                                                 <li class="tocify-item level-2" data-unique="institutions-DELETEapi-institutions--id-">
                                 <a href="#institutions-DELETEapi-institutions--id-">Remove the specified resource from storage.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="institutions-POSTapi-institutions-submit">
+                                <a href="#institutions-POSTapi-institutions-submit">Allows one to submit institution creation request alongside
+location and a list of programs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="institutions-GETapi-institutions--institution--programs">
+                                <a href="#institutions-GETapi-institutions--institution--programs">List an institution's programs.</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-locations" class="tocify-header">
@@ -141,7 +148,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 12, 2025</li>
+        <li>Last updated: April 13, 2025</li>
     </ul>
 </div>
 
@@ -184,7 +191,7 @@ You can switch the language used with the tabs at the top right (or from the nav
     \"page_size\": 16,
     \"page_number\": 22,
     \"order_by\": \"architecto\",
-    \"country_id\": 16,
+    \"location\": \"architecto\",
     \"type\": \"architecto\"
 }"
 </code></pre></div>
@@ -204,7 +211,7 @@ let body = {
     "page_size": 16,
     "page_number": 22,
     "order_by": "architecto",
-    "country_id": 16,
+    "location": "architecto",
     "type": "architecto"
 };
 
@@ -218,7 +225,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-institutions">
             <blockquote>
-            <p>Example response (422):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -231,15 +238,20 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;errors&quot;: {
-            &quot;country_id&quot;: [
-                &quot;The selected country id is invalid.&quot;
-            ]
-        }
+        &quot;paging_meta_data&quot;: {
+            &quot;current_page&quot;: 22,
+            &quot;total_pages&quot;: 1,
+            &quot;page_size&quot;: 16,
+            &quot;total_count&quot;: 2,
+            &quot;last_page&quot;: 1,
+            &quot;from&quot;: null,
+            &quot;to&quot;: null
+        },
+        &quot;data&quot;: []
     },
-    &quot;status_code&quot;: 422,
-    &quot;message&quot;: &quot;Validation failed&quot;,
-    &quot;succeeded&quot;: false
+    &quot;status_code&quot;: 200,
+    &quot;message&quot;: &quot;Institutions retrieved successfully&quot;,
+    &quot;succeeded&quot;: true
 }</code>
  </pre>
     </span>
@@ -358,15 +370,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>country_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+            <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
 <i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="country_id"                data-endpoint="GETapi-institutions"
-               value="16"
+                <input type="text" style="display: none"
+                              name="location"                data-endpoint="GETapi-institutions"
+               value="architecto"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the locations table. Example: <code>16</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
@@ -640,14 +652,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/institutions/architecto" \
+    --get "http://localhost/api/institutions/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/institutions/architecto"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -664,7 +676,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-institutions--id-">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (201):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -677,10 +689,33 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;error&quot;: &quot;Institution not found&quot;
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Jomo Kenyatta University of Agriculture and Technology&quot;,
+        &quot;slug&quot;: &quot;jomo-kenyatta-university-of-agriculture-and-technology-67fbc01189379&quot;,
+        &quot;type&quot;: &quot;university&quot;,
+        &quot;accreditation_status&quot;: &quot;accredited&quot;,
+        &quot;ownership_type&quot;: &quot;public&quot;,
+        &quot;founded_year&quot;: &quot;1975&quot;,
+        &quot;website_url&quot;: &quot;http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab&quot;,
+        &quot;email&quot;: &quot;breitenberg.gilbert@example.com&quot;,
+        &quot;phone&quot;: null,
+        &quot;logo_url&quot;: &quot;http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium&quot;,
+        &quot;location_id&quot;: 1,
+        &quot;latitude&quot;: &quot;-50.0000000&quot;,
+        &quot;longitude&quot;: &quot;-160.0000000&quot;,
+        &quot;location&quot;: {
+            &quot;id&quot;: 1,
+            &quot;country&quot;: &quot;Kenya&quot;,
+            &quot;region&quot;: &quot;Kiambu&quot;,
+            &quot;city&quot;: &quot;Juja&quot;,
+            &quot;postal_code&quot;: &quot;20100&quot;,
+            &quot;latitude&quot;: &quot;-50.0000000&quot;,
+            &quot;longitude&quot;: &quot;-160.0000000&quot;,
+            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;
+        }
     },
-    &quot;status_code&quot;: 500,
-    &quot;message&quot;: &quot;Error retrieving institution&quot;,
+    &quot;status_code&quot;: 201,
+    &quot;message&quot;: &quot;Institution retrieved successfully&quot;,
     &quot;succeeded&quot;: false
 }</code>
  </pre>
@@ -757,14 +792,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-institutions--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-institutions--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the institution. Example: <code>architecto</code></p>
+<p>The ID of the institution. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -781,7 +816,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/institutions/2" \
+    "http://localhost/api/institutions/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -800,7 +835,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/institutions/2"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -910,10 +945,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-institutions--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the institution. Example: <code>2</code></p>
+<p>The ID of the institution. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1041,14 +1076,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/institutions/2" \
+    "http://localhost/api/institutions/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/institutions/2"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -1141,10 +1176,639 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-institutions--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the institution. Example: <code>2</code></p>
+<p>The ID of the institution. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="institutions-POSTapi-institutions-submit">Allows one to submit institution creation request alongside
+location and a list of programs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-institutions-submit">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/institutions/submit" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"b\",
+    \"type\": \"n\",
+    \"accreditation_status\": \"g\",
+    \"ownership_type\": \"z\",
+    \"founded_year\": 17,
+    \"website_url\": \"https:\\/\\/www.gulgowski.com\\/nihil-accusantium-harum-mollitia-modi-deserunt\",
+    \"email\": \"lexus42@example.com\",
+    \"phone\": \"myuwpwlvqwrsitcp\",
+    \"logo_url\": \"http:\\/\\/koch.biz\\/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html\",
+    \"location\": {
+        \"country\": \"b\",
+        \"region\": \"n\",
+        \"city\": \"g\",
+        \"postal_code\": \"z\",
+        \"latitude\": -90,
+        \"longitude\": -180,
+        \"timezone\": \"Europe\\/Dublin\"
+    },
+    \"programs\": [
+        {
+            \"name\": \"v\",
+            \"level\": \"d\",
+            \"mode\": \"l\",
+            \"duration\": \"j\",
+            \"faculty_or_school\": \"n\",
+            \"entry_requirements\": \"architecto\",
+            \"tuition_fee\": 4326.41688,
+            \"currency\": \"miyvdl\",
+            \"language_of_instruction\": \"j\"
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/institutions/submit"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "b",
+    "type": "n",
+    "accreditation_status": "g",
+    "ownership_type": "z",
+    "founded_year": 17,
+    "website_url": "https:\/\/www.gulgowski.com\/nihil-accusantium-harum-mollitia-modi-deserunt",
+    "email": "lexus42@example.com",
+    "phone": "myuwpwlvqwrsitcp",
+    "logo_url": "http:\/\/koch.biz\/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html",
+    "location": {
+        "country": "b",
+        "region": "n",
+        "city": "g",
+        "postal_code": "z",
+        "latitude": -90,
+        "longitude": -180,
+        "timezone": "Europe\/Dublin"
+    },
+    "programs": [
+        {
+            "name": "v",
+            "level": "d",
+            "mode": "l",
+            "duration": "j",
+            "faculty_or_school": "n",
+            "entry_requirements": "architecto",
+            "tuition_fee": 4326.41688,
+            "currency": "miyvdl",
+            "language_of_instruction": "j"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-institutions-submit">
+</span>
+<span id="execution-results-POSTapi-institutions-submit" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-institutions-submit"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-institutions-submit"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-institutions-submit" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-institutions-submit">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-institutions-submit" data-method="POST"
+      data-path="api/institutions/submit"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-institutions-submit', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-institutions-submit"
+                    onclick="tryItOut('POSTapi-institutions-submit');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-institutions-submit"
+                    onclick="cancelTryOut('POSTapi-institutions-submit');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-institutions-submit"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/institutions/submit</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-institutions-submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-institutions-submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-institutions-submit"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-institutions-submit"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>n</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>accreditation_status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="accreditation_status"                data-endpoint="POSTapi-institutions-submit"
+               value="g"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>g</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>ownership_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="ownership_type"                data-endpoint="POSTapi-institutions-submit"
+               value="z"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>z</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>founded_year</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="founded_year"                data-endpoint="POSTapi-institutions-submit"
+               value="17"
+               data-component="body">
+    <br>
+<p>Must be at least 1000. Must not be greater than 2025. Example: <code>17</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>website_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="website_url"                data-endpoint="POSTapi-institutions-submit"
+               value="https://www.gulgowski.com/nihil-accusantium-harum-mollitia-modi-deserunt"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Example: <code>https://www.gulgowski.com/nihil-accusantium-harum-mollitia-modi-deserunt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-institutions-submit"
+               value="lexus42@example.com"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>lexus42@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-institutions-submit"
+               value="myuwpwlvqwrsitcp"
+               data-component="body">
+    <br>
+<p>Must not be greater than 20 characters. Example: <code>myuwpwlvqwrsitcp</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>logo_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="logo_url"                data-endpoint="POSTapi-institutions-submit"
+               value="http://koch.biz/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Example: <code>http://koch.biz/aut-dolores-enim-non-facere-tempora-ex-voluptatem.html</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="location.country"                data-endpoint="POSTapi-institutions-submit"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="location.region"                data-endpoint="POSTapi-institutions-submit"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="location.city"                data-endpoint="POSTapi-institutions-submit"
+               value="g"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>g</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="location.postal_code"                data-endpoint="POSTapi-institutions-submit"
+               value="z"
+               data-component="body">
+    <br>
+<p>Must not be greater than 50 characters. Example: <code>z</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="location.latitude"                data-endpoint="POSTapi-institutions-submit"
+               value="-90"
+               data-component="body">
+    <br>
+<p>Must be between -90 and 90. Example: <code>-90</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="location.longitude"                data-endpoint="POSTapi-institutions-submit"
+               value="-180"
+               data-component="body">
+    <br>
+<p>Must be between -180 and 180. Example: <code>-180</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>timezone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="location.timezone"                data-endpoint="POSTapi-institutions-submit"
+               value="Europe/Dublin"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>Europe/Dublin</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>programs</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.name"                data-endpoint="POSTapi-institutions-submit"
+               value="v"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>v</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.level"                data-endpoint="POSTapi-institutions-submit"
+               value="d"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>d</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>mode</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.mode"                data-endpoint="POSTapi-institutions-submit"
+               value="l"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>l</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>duration</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.duration"                data-endpoint="POSTapi-institutions-submit"
+               value="j"
+               data-component="body">
+    <br>
+<p>Must not be greater than 50 characters. Example: <code>j</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>faculty_or_school</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.faculty_or_school"                data-endpoint="POSTapi-institutions-submit"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>entry_requirements</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.entry_requirements"                data-endpoint="POSTapi-institutions-submit"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>tuition_fee</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="programs.0.tuition_fee"                data-endpoint="POSTapi-institutions-submit"
+               value="4326.41688"
+               data-component="body">
+    <br>
+<p>Example: <code>4326.41688</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>currency</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.currency"                data-endpoint="POSTapi-institutions-submit"
+               value="miyvdl"
+               data-component="body">
+    <br>
+<p>Must not be greater than 10 characters. Example: <code>miyvdl</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>language_of_instruction</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="programs.0.language_of_instruction"                data-endpoint="POSTapi-institutions-submit"
+               value="j"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>j</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="institutions-GETapi-institutions--institution--programs">List an institution&#039;s programs.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-institutions--institution--programs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/institutions/1/programs" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/institutions/1/programs"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-institutions--institution--programs">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Mathematics and Computer Science&quot;,
+            &quot;slug&quot;: &quot;mathematics-and-computer-science-67fbc01691466&quot;,
+            &quot;level&quot;: &quot;degree&quot;,
+            &quot;mode&quot;: &quot;full_time&quot;,
+            &quot;duration&quot;: &quot;4years&quot;,
+            &quot;faculty_or_school&quot;: &quot;School of Mathematical Sciences&quot;,
+            &quot;entry_requirements&quot;: &quot;4.5 GPA&quot;,
+            &quot;tuition_fee&quot;: &quot;4326.42&quot;,
+            &quot;currency&quot;: &quot;KES&quot;,
+            &quot;language_of_instruction&quot;: &quot;English,Swahili&quot;
+        }
+    ],
+    &quot;status_code&quot;: 200,
+    &quot;message&quot;: &quot;Programs retrieved successfully&quot;,
+    &quot;succeeded&quot;: true
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-institutions--institution--programs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-institutions--institution--programs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-institutions--institution--programs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-institutions--institution--programs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-institutions--institution--programs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-institutions--institution--programs" data-method="GET"
+      data-path="api/institutions/{institution}/programs"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-institutions--institution--programs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-institutions--institution--programs"
+                    onclick="tryItOut('GETapi-institutions--institution--programs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-institutions--institution--programs"
+                    onclick="cancelTryOut('GETapi-institutions--institution--programs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-institutions--institution--programs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/institutions/{institution}/programs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-institutions--institution--programs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-institutions--institution--programs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>institution</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="institution"                data-endpoint="GETapi-institutions--institution--programs"
+               value="1"
+               data-component="url">
+    <br>
+<p>The institution. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1212,28 +1876,24 @@ access-control-allow-origin: *
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 2,
+            &quot;id&quot;: 3,
+            &quot;country&quot;: &quot;Kenya&quot;,
+            &quot;region&quot;: &quot;Nairobi County&quot;,
+            &quot;city&quot;: &quot;Nairobi&quot;,
+            &quot;postal_code&quot;: &quot;00100&quot;,
+            &quot;latitude&quot;: &quot;-1.2921000&quot;,
+            &quot;longitude&quot;: &quot;36.8219000&quot;,
+            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;
+        },
+        {
+            &quot;id&quot;: 1,
             &quot;country&quot;: &quot;Kenya&quot;,
             &quot;region&quot;: &quot;Kiambu&quot;,
             &quot;city&quot;: &quot;Juja&quot;,
             &quot;postal_code&quot;: &quot;20100&quot;,
             &quot;latitude&quot;: &quot;-50.0000000&quot;,
             &quot;longitude&quot;: &quot;-160.0000000&quot;,
-            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;,
-            &quot;created_at&quot;: &quot;2025-04-11T11:31:42.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2025-04-11T11:31:42.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 1,
-            &quot;country&quot;: &quot;Kenya&quot;,
-            &quot;region&quot;: &quot;Nairobi&quot;,
-            &quot;city&quot;: &quot;Nairobi&quot;,
-            &quot;postal_code&quot;: &quot;00100&quot;,
-            &quot;latitude&quot;: &quot;-90.0000000&quot;,
-            &quot;longitude&quot;: &quot;-180.0000000&quot;,
-            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;,
-            &quot;created_at&quot;: &quot;2025-04-11T07:52:22.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2025-04-11T07:52:22.000000Z&quot;
+            &quot;timezone&quot;: &quot;Africa/Nairobi&quot;
         }
     ],
     &quot;status_code&quot;: 200,
@@ -1940,7 +2600,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost/api/programs" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"page_size\": 16,
+    \"page_number\": 22,
+    \"order_by\": \"architecto\",
+    \"institution\": \"architecto\",
+    \"level\": \"architecto\",
+    \"mode\": \"architecto\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1953,9 +2622,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "page_size": 16,
+    "page_number": 22,
+    "order_by": "architecto",
+    "institution": "architecto",
+    "level": "architecto",
+    "mode": "architecto"
+};
+
 fetch(url, {
     method: "GET",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1974,7 +2653,18 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [],
+    &quot;data&quot;: {
+        &quot;paging_meta_data&quot;: {
+            &quot;current_page&quot;: 22,
+            &quot;total_pages&quot;: 1,
+            &quot;page_size&quot;: 16,
+            &quot;total_count&quot;: 0,
+            &quot;last_page&quot;: 1,
+            &quot;from&quot;: null,
+            &quot;to&quot;: null
+        },
+        &quot;data&quot;: []
+    },
     &quot;status_code&quot;: 200,
     &quot;message&quot;: &quot;Programs retrieved successfully&quot;,
     &quot;succeeded&quot;: true
@@ -2050,7 +2740,85 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>page_size</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="page_size"                data-endpoint="GETapi-programs"
+               value="16"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>16</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>page_number</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="page_number"                data-endpoint="GETapi-programs"
+               value="22"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>22</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>order_by</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="order_by"                data-endpoint="GETapi-programs"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>search_term</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="search_term"                data-endpoint="GETapi-programs"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>institution</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="institution"                data-endpoint="GETapi-programs"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="level"                data-endpoint="GETapi-programs"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>mode</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="mode"                data-endpoint="GETapi-programs"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+        </form>
 
                     <h2 id="programs-POSTapi-programs">Store a newly created resource in storage.</h2>
 
@@ -2311,14 +3079,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/programs/16" \
+    --get "http://localhost/api/programs/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/programs/16"
+    "http://localhost/api/programs/1"
 );
 
 const headers = {
@@ -2335,7 +3103,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-programs--id-">
             <blockquote>
-            <p>Example response (404):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2348,11 +3116,37 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;errors&quot;: &quot;No query results for model [App\\Models\\Program] 16&quot;
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Mathematics and Computer Science&quot;,
+        &quot;slug&quot;: &quot;mathematics-and-computer-science-67fbc01691466&quot;,
+        &quot;level&quot;: &quot;degree&quot;,
+        &quot;mode&quot;: &quot;full_time&quot;,
+        &quot;duration&quot;: &quot;4years&quot;,
+        &quot;faculty_or_school&quot;: &quot;School of Mathematical Sciences&quot;,
+        &quot;entry_requirements&quot;: &quot;4.5 GPA&quot;,
+        &quot;tuition_fee&quot;: &quot;4326.42&quot;,
+        &quot;currency&quot;: &quot;KES&quot;,
+        &quot;language_of_instruction&quot;: &quot;English,Swahili&quot;,
+        &quot;institution&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Jomo Kenyatta University of Agriculture and Technology&quot;,
+            &quot;slug&quot;: &quot;jomo-kenyatta-university-of-agriculture-and-technology-67fbc01189379&quot;,
+            &quot;type&quot;: &quot;university&quot;,
+            &quot;accreditation_status&quot;: &quot;accredited&quot;,
+            &quot;ownership_type&quot;: &quot;public&quot;,
+            &quot;founded_year&quot;: &quot;1975&quot;,
+            &quot;website_url&quot;: &quot;http://www.okon.com/accusantium-harum-mollitia-modi-deserunt-aut-ab&quot;,
+            &quot;email&quot;: &quot;breitenberg.gilbert@example.com&quot;,
+            &quot;phone&quot;: null,
+            &quot;logo_url&quot;: &quot;http://smitham.com/enim-non-facere-tempora-ex-voluptatem-laboriosam-praesentium&quot;,
+            &quot;location_id&quot;: 1,
+            &quot;latitude&quot;: &quot;-50.0000000&quot;,
+            &quot;longitude&quot;: &quot;-160.0000000&quot;
+        }
     },
-    &quot;status_code&quot;: 404,
-    &quot;message&quot;: &quot;Page Not Found.&quot;,
-    &quot;succeeded&quot;: false
+    &quot;status_code&quot;: 200,
+    &quot;message&quot;: &quot;Program retrieved successfully&quot;,
+    &quot;succeeded&quot;: true
 }</code>
  </pre>
     </span>
@@ -2432,10 +3226,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-programs--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the program. Example: <code>16</code></p>
+<p>The ID of the program. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2452,14 +3246,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/programs/16" \
+    "http://localhost/api/programs/1" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"institution_id\": \"architecto\",
+    \"name\": \"n\",
+    \"level\": \"g\",
+    \"mode\": \"z\",
+    \"duration\": \"m\",
+    \"faculty_or_school\": \"i\",
+    \"entry_requirements\": \"architecto\",
+    \"tuition_fee\": 4326.41688,
+    \"currency\": \"miyvdl\",
+    \"language_of_instruction\": \"j\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/programs/16"
+    "http://localhost/api/programs/1"
 );
 
 const headers = {
@@ -2467,9 +3274,23 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "institution_id": "architecto",
+    "name": "n",
+    "level": "g",
+    "mode": "z",
+    "duration": "m",
+    "faculty_or_school": "i",
+    "entry_requirements": "architecto",
+    "tuition_fee": 4326.41688,
+    "currency": "miyvdl",
+    "language_of_instruction": "j"
+};
+
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2556,12 +3377,123 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-programs--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the program. Example: <code>16</code></p>
+<p>The ID of the program. Example: <code>1</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>institution_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="institution_id"                data-endpoint="PUTapi-programs--id-"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-programs--id-"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>level</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="level"                data-endpoint="PUTapi-programs--id-"
+               value="g"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>g</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>mode</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="mode"                data-endpoint="PUTapi-programs--id-"
+               value="z"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>z</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>duration</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="duration"                data-endpoint="PUTapi-programs--id-"
+               value="m"
+               data-component="body">
+    <br>
+<p>Must not be greater than 50 characters. Example: <code>m</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>faculty_or_school</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="faculty_or_school"                data-endpoint="PUTapi-programs--id-"
+               value="i"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>i</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>entry_requirements</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="entry_requirements"                data-endpoint="PUTapi-programs--id-"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>tuition_fee</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="tuition_fee"                data-endpoint="PUTapi-programs--id-"
+               value="4326.41688"
+               data-component="body">
+    <br>
+<p>Example: <code>4326.41688</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>currency</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="currency"                data-endpoint="PUTapi-programs--id-"
+               value="miyvdl"
+               data-component="body">
+    <br>
+<p>Must not be greater than 10 characters. Example: <code>miyvdl</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>language_of_instruction</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="language_of_instruction"                data-endpoint="PUTapi-programs--id-"
+               value="j"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>j</code></p>
+        </div>
+        </form>
 
                     <h2 id="programs-DELETEapi-programs--id-">Remove the specified resource from storage.</h2>
 
@@ -2576,14 +3508,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/programs/16" \
+    "http://localhost/api/programs/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/programs/16"
+    "http://localhost/api/programs/1"
 );
 
 const headers = {
@@ -2676,10 +3608,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-programs--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the program. Example: <code>16</code></p>
+<p>The ID of the program. Example: <code>1</code></p>
             </div>
                     </form>
 

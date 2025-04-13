@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->enum('type', InstitutionType::values());
             $table->enum('accreditation_status', AccreditationStatus::values())->nullable();
@@ -27,8 +27,6 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('logo_url')->nullable();
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->decimal('latitude', 10, 7)->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }

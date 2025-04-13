@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Institution\CreateInstitutionRequest;
 use App\Http\Requests\Institution\InstitutionQueryRequest;
+use App\Http\Requests\Institution\SubmitInstitutionRequest;
 use App\Http\Requests\Institution\UpdateInstitutionRequest;
 use App\Http\Requests\Location\CreateLocationRequest;
 use App\Http\Resources\InstitutionResource;
@@ -40,6 +41,15 @@ class InstitutionController extends Controller
     }
 
     /**
+     * Allows one to submit institution creation request alongside
+     * location and a list of programs
+     */
+    public function submit(SubmitInstitutionRequest $request)
+    {
+        return $this->institutionService->submit($request);
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -61,5 +71,13 @@ class InstitutionController extends Controller
     public function destroy(string $id)
     {
         return $this->institutionService->delete($id);
+    }
+
+    /**
+     * List an institution's programs.
+     */
+    public function programs(string $id)
+    {
+        return $this->institutionService->programs($id);
     }
 }

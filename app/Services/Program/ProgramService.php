@@ -37,11 +37,29 @@ class ProgramService implements ProgramServiceInterface
 
     public function store(UpsertProgramRequest $request)
     {
-        $institutionIdOrSlug = $request['institution_id'];
+        $createData = $request->validated();
 
-        $this->checkIfInstitutionExists($institutionIdOrSlug);
+        $institutionIdOrSlug = $createData['institution_id'];
+        $institution = $this->checkIfInstitutionExists($institutionIdOrSlug);
+        $createData['institution_id'] = $institution->id;
 
-        $program = Program::create($request->validated());
+        // Uniqueness check based on resolved institution ID
+        $exists = Program::where('institution_id', $institution->id)
+            ->whereRaw('LOWER(name) = ?', [strtolower($createData['name'])])
+            ->exists();
+
+        if ($exists) {
+            return ResponseHelpers::ConvertToJsonResponseWrapper(
+                [
+                    'error' => 'The program name already exists in this institution.',
+                    'institution_name' => $institution->name
+                ],
+                'Validation failed',
+                422
+            );
+        }
+
+        $program = Program::create($createData);
 
         return ResponseHelpers::ConvertToJsonResponseWrapper(
             new ProgramResource($program),
@@ -53,7 +71,6 @@ class ProgramService implements ProgramServiceInterface
     public function show($id)
     {
         $program = $this->getProgram($id);
-
         $program->load('institution');
 
         return ResponseHelpers::ConvertToJsonResponseWrapper(
@@ -67,9 +84,27 @@ class ProgramService implements ProgramServiceInterface
     {
         $program = $this->getProgram($id);
 
-        $this->checkIfInstitutionExists($request['institution_id']);
+        $updateRequest = $request->validated();
+        $institution = $this->checkIfInstitutionExists($updateRequest['institution_id']);
+        $updateRequest['institution_id'] = $institution->id;
 
-        $program->update($request->validated());
+        $exists = Program::where('institution_id', $institution->id)
+            ->whereRaw('LOWER(name) = ?', [strtolower($updateRequest['name'])])
+            ->where('id', '!=', $program->id)
+            ->exists();
+
+        if ($exists) {
+            return ResponseHelpers::ConvertToJsonResponseWrapper(
+                [
+                    'error' => 'The program name already exists in this institution.',
+                    'institution_name' => $institution->name
+                ],
+                'Validation failed',
+                422
+            );
+        }
+
+        $program->update($updateRequest);
 
         return ResponseHelpers::ConvertToJsonResponseWrapper(
             new ProgramResource($program),
@@ -92,9 +127,9 @@ class ProgramService implements ProgramServiceInterface
 
     /**
      * @param mixed $institutionIdOrSlug
-     * @return void
+     * @return mixed
      */
-    public function checkIfInstitutionExists(mixed $institutionIdOrSlug): void
+    public function checkIfInstitutionExists($institutionIdOrSlug)
     {
         $institution = is_numeric($institutionIdOrSlug)
             ? Institution::find((int)$institutionIdOrSlug)
@@ -102,6 +137,8 @@ class ProgramService implements ProgramServiceInterface
 
         if (empty($institution))
             throw new ModelNotFoundException("Institution not found");
+
+        return $institution;
     }
 
     /**
